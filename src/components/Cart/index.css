@@ -1,0 +1,94 @@
+.cart-container {
+  display: flex;
+  justify-content: center;
+  min-height: 75vh;
+}
+
+@media screen and (min-width: 768px) {
+  .cart-container {
+    min-height: 90vh;
+  }
+}
+
+.cart-content-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 1110px;
+  /* border: #0b69ff solid 1px; */
+}
+
+@media screen and (min-width: 768px) {
+  .cart-content-container {
+    width: 80%;
+    max-width: 1110px;
+  }
+}
+
+.cart-heading {
+  color: #3e4c59;
+  font-family: 'Roboto';
+  font-size: 24px;
+  font-weight: 700;
+}
+
+@media screen and (min-width: 768px) {
+  .cart-heading {
+    font-size: 48px;
+  }
+}
+
+/* Write your CSS here */
+.sum {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: flex-end;
+  min-width: 300px;
+  max-width: 900px;
+  /* border: #0b69ff solid 2px; */
+}
+@media screen and (max-width: 767px) {
+  .sum {
+    width: 90%;
+    align-self: center;
+  }
+}
+.sum h1 {
+  color: #616e7c;
+  font-size: 22px;
+}
+.sum span {
+  color: #171f46;
+  font-weight: bold;
+}
+.sum p {
+  color: #9da4ab;
+  font-size: 16px;
+}
+.sum button {
+  color: #fff;
+  background-color: #0b69ff;
+  width: 100%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 10px;
+}
+.remove-Btn {
+  align-self: flex-end;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #0b69ff;
+  font-weight: bold;
+}
+.remove-Btn:hover {
+  text-decoration: underline;
+  color: red;
+}
