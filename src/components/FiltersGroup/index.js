@@ -15,7 +15,7 @@ const FiltersGroup = props => {
 
       return (
         <li
-          className="rating-item"
+          className={`rating-item ${ratingClassName}`}
           key={rating.ratingId}
           onClick={onClickRatingItem}
         >
@@ -24,7 +24,7 @@ const FiltersGroup = props => {
             alt={`rating ${rating.ratingId}`}
             className="rating-img"
           />
-          <p className={ratingClassName}>& up</p>
+          <p>& up</p>
         </li>
       )
     })
@@ -50,11 +50,11 @@ const FiltersGroup = props => {
 
       return (
         <li
-          className="category-item"
+          className={`category-item ${categoryClassName}`}
           key={category.categoryId}
           onClick={onClickCategoryItem}
         >
-          <p className={categoryClassName}>{category.name}</p>
+          <p>{category.name}</p>
         </li>
       )
     })
