@@ -2,7 +2,7 @@ import {Component} from 'react'
 import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-import {BsPlusSquare, BsDashSquare} from 'react-icons/bs'
+import {BsPlusSquare, BsDashSquare, BsBasket2Fill} from 'react-icons/bs'
 
 import CartContext from '../../context/CartContext'
 
@@ -125,7 +125,11 @@ class ProductItemDetails extends Component {
           title,
           totalReviews,
         } = productData
-        const {addCartItem} = value
+        const {addCartItem, cartList} = value
+        console.log(
+          'Check for CartList already or not ==> ',
+          cartList.filter(eachItem => eachItem.id === productData.id),
+        )
         const onClickAddToCart = () => {
           addCartItem({...productData, quantity})
         }
@@ -179,13 +183,25 @@ class ProductItemDetails extends Component {
                     <BsPlusSquare className="quantity-controller-icon" />
                   </button>
                 </div>
-                <button
-                  type="button"
-                  className="button add-to-cart-btn"
-                  onClick={onClickAddToCart}
-                >
-                  ADD TO CART
-                </button>
+                {cartList.filter(
+                  eachItem => eachItem.id === productData.id,
+                )[0] === undefined ? (
+                  <button
+                    type="button"
+                    className="button add-to-cart-btn cart-fill-button"
+                    //   onClick={onClickAddToCart}
+                  >
+                    ADDED TO CART <BsBasket2Fill className="cart-fill" />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="button add-to-cart-btn"
+                    onClick={onClickAddToCart}
+                  >
+                    ADD TO CART
+                  </button>
+                )}
               </div>
             </div>
             <h1 className="similar-products-heading">Similar Products</h1>
