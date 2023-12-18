@@ -280,3 +280,15 @@
     font-size: 48px;
   }
 }
+
+.cart-fill-button {
+  color: #ffffff;
+  background-color: rgb(8, 247, 8);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.cart-fill {
+  color: rgb(8, 247, 8);
+}
