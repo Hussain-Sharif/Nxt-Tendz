@@ -62,8 +62,13 @@
   list-style-type: none;
   margin-top: 16px;
   cursor: pointer;
+  padding-left: 5px;
 }
-
+.category-item:hover {
+  border-bottom: #1b82f8 solid 2px;
+  border-radius: 8px;
+  border-left: #1b82f8 solid 2px;
+}
 @media screen and (min-width: 768px) {
   .category-item {
     margin-top: 24px;
@@ -83,7 +88,9 @@
 }
 
 .active-category-name {
-  color: #0967d2;
+  color: #024da1;
+  border: #1b82f8 solid 2px;
+  border-radius: 8px;
 }
 
 .rating-heading {
@@ -103,7 +110,13 @@
   display: flex;
   align-items: center;
   margin-bottom: 12px;
+  /* padding: 10px; */
   cursor: pointer;
+}
+.rating-item:hover {
+  border-bottom: #1b82f8 solid 2px;
+  border-radius: 8px;
+  border-left: #1b82f8 solid 2px;
 }
 
 .rating-img {
@@ -135,6 +148,8 @@
 
 .active-rating {
   color: #0967d2;
+  border-radius: 8px;
+  border: #1b82f8 solid 2px;
 }
 
 .clear-filters-btn {
