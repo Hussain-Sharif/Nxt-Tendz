@@ -19,10 +19,22 @@
   text-decoration: none;
 }
 
+.thumbnail-box {
+  max-height: 350px;
+  width: 100%;
+  background-color: transparent;
+  overflow: hidden;
+}
+.thumbnail-box:hover img {
+  scale: 1.2;
+}
 .thumbnail {
   width: 100%;
-  max-height: 350px;
+  height: 100%;
+  /* max-height: 350px; */
   border-radius: 6px;
+  object-fit: cover;
+  transition: all ease 0.8s;
 }
 
 .title {
