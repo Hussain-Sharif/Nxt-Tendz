@@ -38,7 +38,8 @@ class App extends Component {
               //   console.log(eachProduct, product)
               return {
                 ...eachProduct,
-                quantity: eachProduct.quantity + 1,
+                // quantity: eachProduct.quantity + product.quantity,
+                quantity: product.quantity,
               }
             }
             return eachProduct
