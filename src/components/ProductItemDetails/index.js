@@ -2,7 +2,7 @@ import {Component} from 'react'
 import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-import {BsPlusSquare, BsDashSquare, BsBasket2Fill} from 'react-icons/bs'
+import {BsPlusSquare, BsDashSquare, BsFillCartCheckFill} from 'react-icons/bs'
 
 import CartContext from '../../context/CartContext'
 
@@ -24,6 +24,7 @@ class ProductItemDetails extends Component {
     similarProductsData: [],
     apiStatus: apiStatusConstants.initial,
     quantity: 1,
+    isQuantityChanged: false,
   }
 
   componentDidMount() {
@@ -103,18 +104,33 @@ class ProductItemDetails extends Component {
   onDecrementQuantity = () => {
     const {quantity} = this.state
     if (quantity > 1) {
-      this.setState(prevState => ({quantity: prevState.quantity - 1}))
+      this.setState(prevState => ({
+        quantity: prevState.quantity - 1,
+        isQuantityChanged: true,
+      }))
     }
   }
 
   onIncrementQuantity = () => {
-    this.setState(prevState => ({quantity: prevState.quantity + 1}))
+    this.setState(prevState => ({
+      quantity: prevState.quantity + 1,
+      isQuantityChanged: true,
+    }))
+  }
+
+  changeDueToBtn = () => {
+    this.setState({isQuantityChanged: false})
   }
 
   renderProductDetailsView = () => (
     <CartContext.Consumer>
       {value => {
-        const {productData, quantity, similarProductsData} = this.state
+        const {
+          productData,
+          quantity,
+          isQuantityChanged,
+          similarProductsData,
+        } = this.state
         const {
           availability,
           brand,
@@ -129,9 +145,13 @@ class ProductItemDetails extends Component {
         console.log(
           'Check for CartList already or not ==> ',
           cartList.filter(eachItem => eachItem.id === productData.id),
+          cartList.filter(eachItem => eachItem.id === productData.id)[0] ===
+            undefined,
+          isQuantityChanged,
         )
         const onClickAddToCart = () => {
           addCartItem({...productData, quantity})
+          this.changeDueToBtn()
         }
 
         return (
@@ -185,21 +205,21 @@ class ProductItemDetails extends Component {
                 </div>
                 {cartList.filter(
                   eachItem => eachItem.id === productData.id,
-                )[0] === undefined ? (
-                  <button
-                    type="button"
-                    className="button add-to-cart-btn cart-fill-button"
-                    //   onClick={onClickAddToCart}
-                  >
-                    ADDED TO CART <BsBasket2Fill className="cart-fill" />
-                  </button>
-                ) : (
+                )[0] === undefined || isQuantityChanged === true ? (
                   <button
                     type="button"
                     className="button add-to-cart-btn"
                     onClick={onClickAddToCart}
                   >
                     ADD TO CART
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="button add-to-cart-btn cart-fill-button"
+                    //   onClick={onClickAddToCart}
+                  >
+                    ADDED TO CART <BsFillCartCheckFill className="cart-fill" />
                   </button>
                 )}
               </div>
