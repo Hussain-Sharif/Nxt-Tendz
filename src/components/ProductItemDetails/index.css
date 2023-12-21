@@ -301,3 +301,44 @@
   padding-left: 8px;
   font-size: 35px;
 }
+.btns-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  /* border: #000 solid 1px; */
+}
+.quantity-btn {
+  display: flex;
+  flex-direction: row;
+  border: rgba(0, 0, 0, 0.514) dashed 1px;
+  border-radius: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-self: flex-start;
+  background-color: transparent;
+  margin-left: 10px;
+  padding: 0px;
+}
+.quantity-btn p {
+  color: #1f9292;
+  border-right: rgba(0, 0, 0, 0.514) dashed 1px;
+  padding: 11px 5px 11px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.quantity-delete-btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.delete-icon {
+  color: rgba(224, 42, 42, 0.397);
+  font-size: 28px;
+  margin: 5px 0px 5px;
+  padding-left: 0;
+}
+.quantity-delete-btn:hover .delete-icon {
+  color: red;
+}
