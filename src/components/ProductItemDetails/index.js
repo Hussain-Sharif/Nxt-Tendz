@@ -1,7 +1,8 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
+import {MdDelete} from 'react-icons/md'
 import {BsPlusSquare, BsDashSquare, BsFillCartCheckFill} from 'react-icons/bs'
 
 import CartContext from '../../context/CartContext'
@@ -118,8 +119,8 @@ class ProductItemDetails extends Component {
     }))
   }
 
-  changeDueToBtn = () => {
-    this.setState({isQuantityChanged: false})
+  changeDueToAddBtn = () => {
+    this.setState({isQuantityChanged: false, quantity: 1})
   }
 
   renderProductDetailsView = () => (
@@ -131,6 +132,7 @@ class ProductItemDetails extends Component {
           isQuantityChanged,
           similarProductsData,
         } = this.state
+
         const {
           availability,
           brand,
@@ -141,7 +143,11 @@ class ProductItemDetails extends Component {
           title,
           totalReviews,
         } = productData
-        const {addCartItem, cartList} = value
+
+        const {addCartItem, cartList, removeCartItem} = value
+        const thisItemAddedToCart = cartList.filter(
+          eachItem => eachItem.id === productData.id,
+        )[0]
         console.log(
           'Check for CartList already or not ==> ',
           cartList.filter(eachItem => eachItem.id === productData.id),
@@ -151,7 +157,11 @@ class ProductItemDetails extends Component {
         )
         const onClickAddToCart = () => {
           addCartItem({...productData, quantity})
-          this.changeDueToBtn()
+          this.changeDueToAddBtn()
+        }
+
+        const delteItemFromCart = () => {
+          removeCartItem(productData.id)
         }
 
         return (
@@ -203,25 +213,41 @@ class ProductItemDetails extends Component {
                     <BsPlusSquare className="quantity-controller-icon" />
                   </button>
                 </div>
-                {cartList.filter(
-                  eachItem => eachItem.id === productData.id,
-                )[0] === undefined || isQuantityChanged === true ? (
-                  <button
-                    type="button"
-                    className="button add-to-cart-btn"
-                    onClick={onClickAddToCart}
-                  >
-                    ADD TO CART
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    className="button add-to-cart-btn cart-fill-button"
-                    //   onClick={onClickAddToCart}
-                  >
-                    ADDED TO CART <BsFillCartCheckFill className="cart-fill" />
-                  </button>
-                )}
+                <div className="btns-container">
+                  {thisItemAddedToCart === undefined ||
+                  isQuantityChanged === true ? (
+                    <button
+                      type="button"
+                      className="button add-to-cart-btn"
+                      onClick={onClickAddToCart}
+                    >
+                      ADD TO CART
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="button add-to-cart-btn cart-fill-button"
+                      //   onClick={onClickAddToCart}
+                    >
+                      ADDED TO CART{' '}
+                      <BsFillCartCheckFill className="cart-fill" />
+                    </button>
+                  )}
+                  {thisItemAddedToCart === undefined ? null : (
+                    <div className="quantity-btn">
+                      <p>Quantiy Added: {thisItemAddedToCart.quantity}</p>
+                      <button
+                        type="button"
+                        className="quantity-delete-btn"
+                        title="Remove Item"
+                        onClick={delteItemFromCart}
+                      >
+                        {' '}
+                        <MdDelete className="delete-icon" />
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
             <h1 className="similar-products-heading">Similar Products</h1>
@@ -266,4 +292,4 @@ class ProductItemDetails extends Component {
   }
 }
 
-export default ProductItemDetails
+export default withRouter(ProductItemDetails)
